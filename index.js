@@ -14,10 +14,12 @@ app.get('/', (req, res) => {
     const perPage = 3;
     const page = parseInt(req.query.page) || 1;
 
-    const totalMessages = messages.length;
+    const reversedMessages = [...messages].reverse();
+
+    const totalMessages = reversedMessages.length;
     const totalPages = Math.ceil(totalMessages / perPage);
 
-    const paginatedMessages = messages.slice((page - 1) * perPage, page * perPage);
+    const paginatedMessages = reversedMessages.slice((page - 1) * perPage, page * perPage);
 
     res.render('index', { 
         msg: paginatedMessages,
@@ -25,6 +27,7 @@ app.get('/', (req, res) => {
         totalPages: totalPages
     });
 });
+
 
 app.get('/new', (req, res) => {
     res.render('new');
