@@ -2,7 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 
 const app = express();
-const port = 2500;
+const port = process.env.PORT || 2500;  // ✅ Fix for Vercel
 
 app.set('view engine', 'ejs');
 app.use(express.static("public"));
@@ -31,22 +31,21 @@ app.get('/new', (req, res) => {
 });
 
 app.post('/add', (req, res) => {
-    const { ctitle, content} = req.body;
+    const { ctitle, content } = req.body;
     const id = messages.length + 1;
-    messages.push({id, ctitle, content});
+    messages.push({ id, ctitle, content });
     res.redirect('/');
 });
 
 app.get('/edit/:id', (req, res) => {
-    const message = messages.find( p => p.id == req.params.id);
+    const message = messages.find(p => p.id == req.params.id);
     if (!message) return res.redirect('/');
     res.render('edit', { message });
-    
 });
 
 app.post('/update/:id', (req, res) => {
-    const message = messages.find( p => p.id == req.params.id);
-    if (message){
+    const message = messages.find(p => p.id == req.params.id);
+    if (message) {
         message.ctitle = req.body.ctitle;
         message.content = req.body.content;
     }
