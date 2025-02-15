@@ -1,0 +1,10 @@
+<%- include('partials/header.ejs') %>
+
+<h1>👾 Hola! Amigos!</h1>
+<form action="/add" method="POST" class="card2">
+    <input type="text" name="ctitle" placeholder="tities oh.. i mean title" required>
+    <textarea name="content" placeholder="Type your message here"></textarea>
+    <button type="submit">SEND</button>
+</form>
+
+<%- include('partials/footer.ejs') %>

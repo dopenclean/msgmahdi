@@ -1,0 +1,13 @@
+<%- include('partials/header.ejs') %>
+
+<div class="container">
+    <h1>Edit Message</h1>
+    <form action="/update/<%= message.id %>" method="POST" class="card2">
+        <input type="text" name="ctitle" value="<%= message.ctitle %>" required>
+        <textarea name="content" required><%= message.content %></textarea>
+        <button type="submit">Update</button>
+    </form>
+    <a href="/" class="button-4">Back</a>
+</div>
+
+<%- include('partials/footer.ejs') %>

@@ -1,0 +1,40 @@
+<%- include('partials/header.ejs') %>
+
+<h1>Leave your Message</h1>
+<p>You can create/ add / edit for any type of message.</p>
+<a href="/new" class="create-new">Create New Message</a>
+
+<div class="card">
+    <% msg.forEach(message => { %>
+    <div class="content">
+        <div class="text">
+            <h2><%= message.ctitle %></h2>
+            <p><%= message.content %></p>
+        </div>
+        <div class="actions">
+            <a href='/edit/<%= message.id %>' class="edit">EDIT</a>
+            <form action="/delete/<%= message.id %>" method="POST">
+            <button class="delete button-5">Delete</button>
+            </form>
+        </div>
+    </div>
+    <% }); %>
+</div>
+
+<!-- Pagination Controls -->
+<div class="pagination-container">
+    <div class="pagination">
+        <% if (currentPage > 1) { %>
+            <a href="/?page=<%= currentPage - 1 %>" class="button-4">Previous</a>
+        <% } %>
+
+        <span class="page-info">Page <%= currentPage %> of <%= totalPages %></span>
+
+        <% if (currentPage < totalPages) { %>
+            <a href="/?page=<%= currentPage + 1 %>" class="button-4">Next</a>
+        <% } %>
+    </div>
+</div>
+
+
+<%- include('partials/footer.ejs') %>
